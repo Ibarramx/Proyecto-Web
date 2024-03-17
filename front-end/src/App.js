@@ -2,6 +2,7 @@ import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PrimerFormulario from './componentes/PrimerFormulario';
+import Usuario from './componentes/Usuario';
 
 function App() {
   const [personaNombre, setPersona] = useState("Jonathan Moroyoqui");
@@ -10,9 +11,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <PrimerFormulario 
-        personaNombre={personaNombre} />
       </header>
+      <Usuario></Usuario>
     </div>
   );
 }

@@ -1,9 +1,6 @@
 import { Button, Form, Col, Row } from 'react-bootstrap';
 
-function PrimerFormulario( personaNombre ) {
-    function Click(){
-        console.log(personaNombre);
-    }
+function PrimerFormulario( personaNombre ) {    
     
     return(
         <Row>
@@ -14,7 +11,7 @@ function PrimerFormulario( personaNombre ) {
                 <Form.Control type="text" value={personaNombre.personaNombre}></Form.Control>
             </Col>
             <Col>
-                <Button onClick={Click()}>Guardar</Button>
+                <Button>Guardar</Button>
             </Col>
         </Row>
     );
