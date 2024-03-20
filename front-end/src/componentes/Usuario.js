@@ -1,8 +1,10 @@
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
 
 function Usuario(params) {
+    
+    
     return(
-        <Card >
+        <Card>
             <Card.Header>
                 <h1>Registro de Usuario</h1>
             </Card.Header>
@@ -15,6 +17,7 @@ function Usuario(params) {
                         <Form.Control type="text"></Form.Control>
                     </Col>
                 </Row>
+                <br/>
 
                 <Row>
                     <Col lg={6} sm={12} xl={6}>
@@ -24,6 +27,7 @@ function Usuario(params) {
                         <Form.Control type="text"></Form.Control>
                     </Col>
                 </Row>
+                <br/>
 
                 <Row>
                     <Col lg={6} sm={12} xl={6}>
@@ -33,6 +37,7 @@ function Usuario(params) {
                         <Form.Control type="text"></Form.Control>
                     </Col>
                 </Row>
+                <br/>
 
                 <Row>
                     <Col lg={6} sm={12} xl={6}>
@@ -43,6 +48,7 @@ function Usuario(params) {
                         
                     </Col>
                 </Row>
+                <br/>
 
                 <Row>
                     <Col lg={6} sm={12} xl={6}>
@@ -52,6 +58,7 @@ function Usuario(params) {
                         <Form.Control type="password"></Form.Control>
                     </Col>
                 </Row>
+                <br/>
                 
                 <Row>
                     <Col lg={6} sm={12} xl={6}>
@@ -61,10 +68,10 @@ function Usuario(params) {
                         <Form.Control type="password"></Form.Control>
                     </Col>
                 </Row>
-                
-                <Button variant='primary'>Guardar</Button>
+                <br/>
             </Card.Body>
             <Card.Footer>
+                <Button variant='primary'>Guardar</Button>
             </Card.Footer>
         </Card>
     );
