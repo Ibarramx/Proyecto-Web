@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import PrimerFormulario from './componentes/PrimerFormulario';
-import Usuario from './componentes/Usuario';
-import { Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Usuarios from './componentes/usuarios/index';
+import { Row } from 'react-bootstrap';
 
 function App() {
-  const [personaNombre, setPersona] = useState("Jonathan Moroyoqui");
 
   return (
     <div className="App">
@@ -17,9 +14,7 @@ function App() {
       <br/>
       
       <Row className='justify-content-center'>
-        <Col sm={6}>
-          <Usuario/>
-        </Col>
+        <Usuarios/>
       </Row>
     </div>
   );
