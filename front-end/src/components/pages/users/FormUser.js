@@ -1,8 +1,11 @@
+import React from 'react';
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
 
-function Usuario(params) {
-    
-    
+function FormUser({ showForm }) {
+    const showTable = () => {
+        showForm();
+    };
+
     return(
         <Card>
             <Card.Header>
@@ -71,9 +74,10 @@ function Usuario(params) {
                 <br/>
             </Card.Body>
             <Card.Footer>
+                <Button variant='danger' onClick={showTable()}>Cancelar</Button>
                 <Button variant='primary'>Guardar</Button>
             </Card.Footer>
         </Card>
     );
 }
-export default Usuario;
+export default FormUser;
