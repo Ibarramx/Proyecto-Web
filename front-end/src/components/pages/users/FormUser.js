@@ -2,9 +2,9 @@ import React from 'react';
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
 
 function FormUser({ showForm }) {
-    const showTable = () => {
-        showForm();
-    };
+    // const showTable = () => {
+    //     showForm();
+    // };
 
     return(
         <Card>
@@ -74,7 +74,7 @@ function FormUser({ showForm }) {
                 <br/>
             </Card.Body>
             <Card.Footer>
-                <Button variant='danger' onClick={showTable()}>Cancelar</Button>
+                <Button variant='danger' onClick={showForm}>Cancelar</Button>
                 <Button variant='primary'>Guardar</Button>
             </Card.Footer>
         </Card>

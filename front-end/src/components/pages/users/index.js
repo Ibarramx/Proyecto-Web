@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import FormUser from './FormUser';
 import TableUser from './TableUser';
 
-function Usuarios({ personaNombre }) {
+function Usuarios() {
     const [showForm, setShowForm] = useState(false);
 
     const showTable = () => {
-        setShowForm(!showForm);
+        setShowForm(prevShowForm => !prevShowForm); // Utilizando el estado anterior
     };
 
     return (
