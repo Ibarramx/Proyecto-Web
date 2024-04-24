@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/layout/app/App';
+import '@progress/kendo-theme-default/dist/all.css';
 
 // Redux
 import store from '../src/redux/store/store';
