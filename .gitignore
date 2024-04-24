@@ -248,3 +248,6 @@ ModelManifest.xml
 /FrontOffice.ReactJs/ClientApp/src/assets/js
 /FrontOffice.ReactJs/ClientApp/src/assets/media/general/preview
 /Presentacion/Properties/PublishProfiles/FolderProfile1.pubxml
+.DS_Store
+.DS_Store
+API/.DS_Store
