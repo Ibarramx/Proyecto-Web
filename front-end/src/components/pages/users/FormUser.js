@@ -2,10 +2,6 @@ import React from 'react';
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
 
 function FormUser({ showForm }) {
-    // const showTable = () => {
-    //     showForm();
-    // };
-
     return(
         <Card>
             <Card.Header>
