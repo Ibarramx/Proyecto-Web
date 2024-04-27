@@ -11,8 +11,9 @@ function TableUser({ showForm }, idUser) {
         dispatch(getUsers());
     },[dispatch]);
     function ExtraerUsuario(){
-            //Aqui la logica de la tabla
+        //Aqui la logica de la tabla
     }
+
     return (
         <Col>
             <Button variant='primary' onClick={showForm}>Nuevo Usuario</Button>
