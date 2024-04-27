@@ -1,6 +1,6 @@
-﻿using API.Infraestructura.Modelos;
+﻿using API.Comun.Interfaces;
+using API.Infraestructura.Modelos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 namespace API.Controllers.Usuarios
 {
@@ -8,16 +8,32 @@ namespace API.Controllers.Usuarios
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private dataUsuarios semilla = new dataUsuarios();
-        
-        [HttpGet]
-        public ActionResult<IEnumerable<Usuario>> Get()
+        private readonly IApliacacionBdContexto _contexto;
+        public UsuarioController(IApliacacionBdContexto contexto)
         {
-            return semilla._usuarios;
+            _contexto = contexto;
+        }
+        private dataUsuarios semilla = new dataUsuarios();
+
+        [HttpGet]
+        public ActionResult<IEnumerable<ItemUsuarioDto>> Get()
+        {
+            var usuarios = (from u in _contexto.Usuario
+                            where u.Habilitado
+                            select new ItemUsuarioDto
+                            {
+                                Nombre = u.Nombre,
+                                PrimerApellido = u.PrimerApellido,
+                                SegundoApellido = u.SegundoApellido,
+                                FechaNacimiento = u.FechaNacimiento,
+                                NombreUsuario = u.NombreUsuario
+                            }).ToArray();
+                
+            return usuarios;
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Usuario> Get(int id)
+        public ActionResult<ItemUsuarioDto> Get(int id)
         {
             var user = semilla._usuarios.Where(u => u.IDUsuario == id).FirstOrDefault();
 
@@ -25,7 +41,7 @@ namespace API.Controllers.Usuarios
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Usuario usuario)
+        public ActionResult Post([FromBody] ItemUsuarioDto usuario)
         {
             semilla._usuarios.Add(usuario);
 

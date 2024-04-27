@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace API.Entidades
 {
     public class Usuario
     {
+        [Key]
         public int IDUsuario { get; set; }
         public int IDRol { get; set; }
         public string Nombre { get; set; }

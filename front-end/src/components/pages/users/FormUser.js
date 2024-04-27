@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { getUserUnique } from '../../../redux/actions/actionUsers';
 
-function FormUser({ showForm }) {
-    // const showTable = () => {
-    //     showForm();
-    // };
+function FormUser({ showForm }, idUserEdit) {// Valores iniciales del formulario
+    const InitialValues = {
+      nombre: '',
+      apellidoPaterno: '',
+      apellidoMaterno: '',
+      nombreUsuario: '',
+      contrasena: '',
+      confirmacionContrasena: '',
+      correoElectronico: '',
+      habilitado: true
+    };
+    const dispatch = useDispatch();
+    const [userEdit, setUserEdit] = useState(null);
+    const [user, setUser] = useState(...InitialValues);
+  
 
+    useEffect(() => {
+        if(idUserEdit > 0){
+            dispatch(getUserUnique(idUserEdit))
+                .then((response) => {
+                    setUserEdit(response);
+                });
+        }
+    },[dispatch, idUserEdit])
     return(
         <Card>
             <Card.Header>
@@ -17,7 +38,7 @@ function FormUser({ showForm }) {
                         <Form.Label>Nombre : </Form.Label>
                     </Col>
                     <Col lg={6} sm={12} xl={6}>
-                        <Form.Control type="text"></Form.Control>
+                        <Form.Control value={() => user.Nombre} type="text"></Form.Control>
                     </Col>
                 </Row>
                 <br/>

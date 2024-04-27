@@ -2,9 +2,9 @@ using API.Infraestructura.Modelos;
 
 public class dataUsuarios
 {
-    public List<Usuario> _usuarios = new List<Usuario>
+    public List<ItemUsuarioDto> _usuarios = new List<ItemUsuarioDto>
     {
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 1,
             Nombre = "John",
@@ -15,7 +15,7 @@ public class dataUsuarios
             Contraseña = "password123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 2,
             Nombre = "Jane",
@@ -26,7 +26,7 @@ public class dataUsuarios
             Contraseña = "password456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 3,
             Nombre = "Michael",
@@ -37,7 +37,7 @@ public class dataUsuarios
             Contraseña = "qwerty123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 4,
             Nombre = "Emily",
@@ -48,7 +48,7 @@ public class dataUsuarios
             Contraseña = "abc123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 5,
             Nombre = "David",
@@ -59,7 +59,7 @@ public class dataUsuarios
             Contraseña = "david123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 6,
             Nombre = "Sarah",
@@ -70,7 +70,7 @@ public class dataUsuarios
             Contraseña = "sarah456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 7,
             Nombre = "Daniel",
@@ -81,7 +81,7 @@ public class dataUsuarios
             Contraseña = "daniel123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 8,
             Nombre = "Jessica",
@@ -92,7 +92,7 @@ public class dataUsuarios
             Contraseña = "jessica456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 9,
             Nombre = "Ryan",
@@ -103,7 +103,7 @@ public class dataUsuarios
             Contraseña = "ryan123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 10,
             Nombre = "Amanda",
@@ -114,7 +114,7 @@ public class dataUsuarios
             Contraseña = "amanda456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 11,
             Nombre = "Christopher",
@@ -125,7 +125,7 @@ public class dataUsuarios
             Contraseña = "chris123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 12,
             Nombre = "Lauren",
@@ -136,7 +136,7 @@ public class dataUsuarios
             Contraseña = "lauren456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 13,
             Nombre = "Matthew",
@@ -147,7 +147,7 @@ public class dataUsuarios
             Contraseña = "matt123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 14,
             Nombre = "Stephanie",
@@ -158,7 +158,7 @@ public class dataUsuarios
             Contraseña = "steph456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 15,
             Nombre = "Justin",
@@ -169,7 +169,7 @@ public class dataUsuarios
             Contraseña = "justin123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 16,
             Nombre = "Ashley",
@@ -180,7 +180,7 @@ public class dataUsuarios
             Contraseña = "ashley456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 17,
             Nombre = "Brandon",
@@ -191,7 +191,7 @@ public class dataUsuarios
             Contraseña = "brandon123",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 18,
             Nombre = "Nicole",
@@ -202,7 +202,7 @@ public class dataUsuarios
             Contraseña = "nicole456",
             Habilitado = true
         },
-        new Usuario
+        new ItemUsuarioDto
         {
             IDUsuario = 19,
             Nombre = "Kevin",

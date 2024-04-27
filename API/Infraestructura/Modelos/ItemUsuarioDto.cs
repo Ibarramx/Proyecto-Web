@@ -1,6 +1,6 @@
 ﻿namespace API.Infraestructura.Modelos
 {
-    public class Usuario
+    public class ItemUsuarioDto
     {
         public int IDUsuario { get; set; }
         public string Nombre { get; set; }
