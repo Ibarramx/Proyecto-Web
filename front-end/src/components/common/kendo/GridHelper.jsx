@@ -9,6 +9,7 @@ import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { Grid, GridColumn as Column, getSelectedState, GridToolbar } from '@progress/kendo-react-grid';
 import { setExpandedState, getGroupIds } from '@progress/kendo-react-data-tools';
 import { getter } from '@progress/kendo-react-common';
+
 export function getNestedValue(fieldName, dataItem) {
   const path = (fieldName || '').split('.');
   let data = dataItem;

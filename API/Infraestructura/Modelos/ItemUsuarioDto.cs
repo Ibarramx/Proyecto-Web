@@ -2,7 +2,8 @@
 {
     public class ItemUsuarioDto
     {
-        public int IDUsuario { get; set; }
+        public int IDUsuario { get; set; }        
+        public int IDRol { get; set; }
         public string Nombre { get; set; }
         public string PrimerApellido { get; set; }
         public string SegundoApellido { get; set; }
