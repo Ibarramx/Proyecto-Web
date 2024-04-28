@@ -4,19 +4,9 @@ import { useDispatch } from 'react-redux';
 import { getUserUnique } from '../../../redux/actions/actionUsers';
 
 function FormUser({ showForm }, idUserEdit) {// Valores iniciales del formulario
-    const InitialValues = {
-      nombre: '',
-      apellidoPaterno: '',
-      apellidoMaterno: '',
-      nombreUsuario: '',
-      contrasena: '',
-      confirmacionContrasena: '',
-      correoElectronico: '',
-      habilitado: true
-    };
+    
     const dispatch = useDispatch();
     const [userEdit, setUserEdit] = useState(null);
-    const [user, setUser] = useState(...InitialValues);
   
 
     useEffect(() => {
@@ -38,7 +28,7 @@ function FormUser({ showForm }, idUserEdit) {// Valores iniciales del formulario
                         <Form.Label>Nombre : </Form.Label>
                     </Col>
                     <Col lg={6} sm={12} xl={6}>
-                        <Form.Control value={() => user.Nombre} type="text"></Form.Control>
+                        <Form.Control type="text"></Form.Control>
                     </Col>
                 </Row>
                 <br/>
@@ -95,7 +85,7 @@ function FormUser({ showForm }, idUserEdit) {// Valores iniciales del formulario
                 <br/>
             </Card.Body>
             <Card.Footer>
-                <Button variant='danger' onClick={showForm}>Cancelar</Button>
+                <Button variant='danger' onClick={showForm} className='m-1'>Cancelar</Button>
                 <Button variant='primary'>Guardar</Button>
             </Card.Footer>
         </Card>

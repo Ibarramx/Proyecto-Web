@@ -3,17 +3,12 @@ using API.Comun.Interfaces;
 using API.Filtros;
 using API.Persistencia;
 using API.Servicios;
-using Aplicacion.Comun.Interfaces;
+using API.Comun.Comportamientos;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,9 +21,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<AplicacionBdContexto>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConexion")));
 builder.Services.AddScoped<IApliacacionBdContexto>(prov => prov.GetService<AplicacionBdContexto>());
 
-builder.Services.AddTransient<ITokenIdentidadServicio, JwtTokenServicio>();
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(NoManejadaExcepcionComportamiento<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidadorComportamiento<,>));
 
-builder.Services.AddTransient<IHasherServicio, Sha512HasherServicio>();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+//builder.Services.AddTransient<IHasherServicio, Sha512HasherServicio>();
 
 builder.Services.AddMvc(options =>
 {
@@ -42,17 +40,17 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Progr
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(NoManejadaExcepcionComportamiento<,>));
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidadorComportamiento<,>));
 
-// Configurar políticas CORS
+// Configurar polï¿½ticas CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PoliticasCors", builder =>
     {
         builder.AllowAnyOrigin() // Permite cualquier origen
-               .AllowAnyMethod() // Permite cualquier método HTTP
+               .AllowAnyMethod() // Permite cualquier mï¿½todo HTTP
                .AllowAnyHeader(); // Permite cualquier encabezado HTTP
     });
 });
-
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

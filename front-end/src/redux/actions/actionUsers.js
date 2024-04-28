@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getUsers = createAsyncThunk("users/getUsers",
-    async ({rejectWithValue}) => {
+    async () => {
         try
         {      
             const resp = await axios.get('http://187.189.158.186:7777/Usuario');
@@ -11,7 +11,7 @@ export const getUsers = createAsyncThunk("users/getUsers",
         } 
         catch (error) 
         {
-            return rejectWithValue(`Error: ${error.message}`);
+            return null;
         }
     }
 );

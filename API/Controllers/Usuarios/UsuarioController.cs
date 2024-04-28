@@ -26,7 +26,8 @@ namespace API.Controllers.Usuarios
                                 PrimerApellido = u.PrimerApellido,
                                 SegundoApellido = u.SegundoApellido,
                                 FechaNacimiento = u.FechaNacimiento,
-                                NombreUsuario = u.NombreUsuario
+                                NombreUsuario = u.NombreUsuario,
+                                Habilitado = u.Habilitado,
                             }).ToArray();
                 
             return usuarios;
