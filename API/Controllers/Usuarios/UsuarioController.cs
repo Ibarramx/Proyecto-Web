@@ -41,19 +41,19 @@ namespace API.Controllers.Usuarios
         public ActionResult<ItemUsuarioDto> Get(int id)
         {
             var user = (from u in _contexto.Usuario
-                                    where u.IDUsuario == id
-                                    select new ItemUsuarioDto()
-                                    {
-                                        Nombre = u.Nombre,
-                                        PrimerApellido = u.PrimerApellido,
-                                        SegundoApellido = u.SegundoApellido,
-                                        FechaNacimiento = u.FechaNacimiento,
-                                        Correo = u.Correo,
-                                        Telefono = u.Telefono,
-                                        Genero = u.Genero,
-                                        NombreUsuario = u.NombreUsuario,
-                                        Habilitado = u.Habilitado
-                                    }).FirstOrDefault();
+                        where u.IDUsuario == id
+                        select new ItemUsuarioDto()
+                        {
+                            Nombre = u.Nombre,
+                            PrimerApellido = u.PrimerApellido,
+                            SegundoApellido = u.SegundoApellido,
+                            FechaNacimiento = u.FechaNacimiento,
+                            Correo = u.Correo,
+                            Telefono = u.Telefono,
+                            Genero = u.Genero,
+                            NombreUsuario = u.NombreUsuario,
+                            Habilitado = u.Habilitado
+                        }).FirstOrDefault();
 
             return user;
         }
@@ -79,6 +79,7 @@ namespace API.Controllers.Usuarios
             };
             
             _contexto.Usuario.Add(newUser);
+            _contexto.SaveChanges();
 
             return Ok();
         }
@@ -96,11 +97,13 @@ namespace API.Controllers.Usuarios
                 user.SegundoApellido = userEdit.SegundoApellido;
                 user.Genero = userEdit.Genero;
                 user.Correo = userEdit.Correo;
-                user.Telefono = user.Telefono;
+                user.Telefono = userEdit.Telefono;
                 user.FechaNacimiento = userEdit.FechaNacimiento;
                 user.IDRol = userEdit.IDRol;
                 user.FechaModificacion = DateTime.Now;
             }
+
+            _contexto.SaveChanges();
 
             return Ok();
         }
@@ -114,7 +117,9 @@ namespace API.Controllers.Usuarios
                 user.Habilitado = false;
             else
                 return BadRequest();
-            
+
+            _contexto.SaveChanges();
+
             return NoContent();
         }
         
