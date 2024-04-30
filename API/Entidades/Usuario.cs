@@ -19,7 +19,5 @@ namespace API.Entidades
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
         public bool Habilitado { get; set; }
-
-        public virtual Rol Rol { get; set; }
     }
 }

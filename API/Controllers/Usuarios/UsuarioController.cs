@@ -83,6 +83,7 @@ namespace API.Controllers.Usuarios
             };
             
             _contexto.Usuario.Add(newUser);
+            _contexto.SaveChanges();
 
             return Ok();
         }
@@ -100,11 +101,13 @@ namespace API.Controllers.Usuarios
                 user.SegundoApellido = userEdit.SegundoApellido;
                 user.Genero = userEdit.Genero;
                 user.Correo = userEdit.Correo;
-                user.Telefono = user.Telefono;
+                user.Telefono = userEdit.Telefono;
                 user.FechaNacimiento = userEdit.FechaNacimiento;
                 user.IDRol = userEdit.IDRol;
                 user.FechaModificacion = DateTime.Now;
             }
+
+            _contexto.SaveChanges();
 
             return Ok();
         }
@@ -118,7 +121,9 @@ namespace API.Controllers.Usuarios
                 user.Habilitado = user.Habilitado == false;
             else
                 return BadRequest();
-            
+
+            _contexto.SaveChanges();
+
             return NoContent();
         }
         
