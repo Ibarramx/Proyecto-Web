@@ -16,7 +16,7 @@ export const getUsers = createAsyncThunk("users/getUsers",
     }
 );
 
-export const getUserUnique = createAsyncThunk("users/getUsersUnique",
+export const getUserUnique = createAsyncThunk("users/getUserUnique",
     async (id, {rejectWithValue}) => {
         try
         {      

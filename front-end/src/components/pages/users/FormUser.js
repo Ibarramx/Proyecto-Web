@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
-// import { useDispatch } from 'react-redux';
-// import { getUserUnique } from '../../../redux/actions/actionUsers';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getUserUnique } from '../../../redux/actions/actionUsers';
 
-function FormUser({ showForm }) {// Valores iniciales del formulario
-    
-    // const dispatch = useDispatch();
-    // const [userEdit, setUserEdit] = useState(null);
-  
+function FormUser({ showForm , idUserEdit}) {// Valores iniciales del formulario
+    const dispatch = useDispatch();
+    const [user, setUserEdit] = useState(null);
 
-    // useEffect(() => {
-    //     if(idUserEdit > 0){
-    //         dispatch(getUserUnique(idUserEdit))
-    //             .then((response) => {
-    //                 setUserEdit(response);
-    //             });
-    //     }
-    // },[dispatch, idUserEdit])
+    React.useEffect(() => {
+        if(idUserEdit !== ''){
+            dispatch(getUserUnique(idUserEdit))
+            .then((response) => {
+                setUserEdit(response.payload);
+            });
+        }
+    }, [dispatch, idUserEdit]);
 
     return(
         <Col lg={8} xs={12} sm={8}>
