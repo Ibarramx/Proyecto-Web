@@ -23,6 +23,8 @@ namespace API.Controllers.Usuarios
                             where u.Habilitado
                             select new ItemUsuarioDto
                             {
+                                IDUsuario = u.IDUsuario,
+                                IDRol = u.IDRol,
                                 Nombre = u.Nombre,
                                 PrimerApellido = u.PrimerApellido,
                                 SegundoApellido = u.SegundoApellido,
@@ -44,6 +46,8 @@ namespace API.Controllers.Usuarios
                                     where u.IDUsuario == id
                                     select new ItemUsuarioDto()
                                     {
+                                        IDUsuario = u.IDUsuario,
+                                        IDRol = u.IDRol,
                                         Nombre = u.Nombre,
                                         PrimerApellido = u.PrimerApellido,
                                         SegundoApellido = u.SegundoApellido,
@@ -111,7 +115,7 @@ namespace API.Controllers.Usuarios
             var user = _contexto.Usuario.Find(id);
 
             if (user != null)
-                user.Habilitado = false;
+                user.Habilitado = user.Habilitado == false;
             else
                 return BadRequest();
             
