@@ -23,6 +23,8 @@ namespace API.Controllers.Usuarios
                             where u.Habilitado
                             select new ItemUsuarioDto
                             {
+                                IDUsuario = u.IDUsuario,
+                                IDRol = u.IDRol,
                                 Nombre = u.Nombre,
                                 PrimerApellido = u.PrimerApellido,
                                 SegundoApellido = u.SegundoApellido,
@@ -41,19 +43,21 @@ namespace API.Controllers.Usuarios
         public ActionResult<ItemUsuarioDto> Get(int id)
         {
             var user = (from u in _contexto.Usuario
-                        where u.IDUsuario == id
-                        select new ItemUsuarioDto()
-                        {
-                            Nombre = u.Nombre,
-                            PrimerApellido = u.PrimerApellido,
-                            SegundoApellido = u.SegundoApellido,
-                            FechaNacimiento = u.FechaNacimiento,
-                            Correo = u.Correo,
-                            Telefono = u.Telefono,
-                            Genero = u.Genero,
-                            NombreUsuario = u.NombreUsuario,
-                            Habilitado = u.Habilitado
-                        }).FirstOrDefault();
+                                    where u.IDUsuario == id
+                                    select new ItemUsuarioDto()
+                                    {
+                                        IDUsuario = u.IDUsuario,
+                                        IDRol = u.IDRol,
+                                        Nombre = u.Nombre,
+                                        PrimerApellido = u.PrimerApellido,
+                                        SegundoApellido = u.SegundoApellido,
+                                        FechaNacimiento = u.FechaNacimiento,
+                                        Correo = u.Correo,
+                                        Telefono = u.Telefono,
+                                        Genero = u.Genero,
+                                        NombreUsuario = u.NombreUsuario,
+                                        Habilitado = u.Habilitado
+                                    }).FirstOrDefault();
 
             return user;
         }
@@ -114,7 +118,7 @@ namespace API.Controllers.Usuarios
             var user = _contexto.Usuario.Find(id);
 
             if (user != null)
-                user.Habilitado = false;
+                user.Habilitado = user.Habilitado == false;
             else
                 return BadRequest();
 
