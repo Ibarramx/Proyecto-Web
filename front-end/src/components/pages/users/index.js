@@ -7,16 +7,21 @@ function Usuarios() {
     const dispatch = useDispatch();
     const [showForm, setShowForm] = useState(false);
     const [idUserEdit, setUserEdit] = useState(0);
+
     const showTable = () => {
         setShowForm(prevShowForm => !prevShowForm); // Utilizando el estado anterior
+        if(showForm){
+            setUserEdit(idUserEdit);
+        }
     };
+
     useEffect(() => {
-        console.log(idUserEdit)
+        
     }, [dispatch, idUserEdit]);
 
     return (
         showForm ? (
-            <FormUser showForm={showTable} idUserEdit={idUserEdit}/>
+            <FormUser showForm={showTable} id={idUserEdit}/>
         ) : (
             <TableUser showForm={showTable} idUserEdit={id => setUserEdit(id)}/>
         )

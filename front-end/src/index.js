@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/layout/app/App';
 import '@progress/kendo-theme-default/dist/all.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 // Redux
 import store from '../src/redux/store/store';

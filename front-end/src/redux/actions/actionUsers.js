@@ -30,3 +30,33 @@ export const getUserUnique = createAsyncThunk("users/getUserUnique",
         }
     }
 );
+
+export const addUser = createAsyncThunk("users/addUser",
+    async (data, {rejectWithValue}) => {
+        try
+        {      
+            const resp = await axios.post('http://187.189.158.186:7777/Usuario', data);
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return rejectWithValue(`Error: ${error.message}`);
+        }
+    }
+);
+
+export const deleteUser = createAsyncThunk("users/deleteUser",
+    async (id, {rejectWithValue}) => {
+        try
+        {      
+            const resp = await axios.delete('http://187.189.158.186:7777/Usuario/'+id);
+
+            return resp.data;
+        } 
+        catch (error) 
+        {
+            return rejectWithValue(`Error: ${error.message}`);
+        }
+    }
+);

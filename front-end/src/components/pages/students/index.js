@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormularioUsuario from './FormularioUsuario';
 import TablaUsuario from './TablaUsuario';
 
-function Usuarios({ personaNombre }) {
+function Usuarios() {
     const [mostrarForm, setMostrarForm] = useState(false);
 
     const mostrarTabla = () => {
