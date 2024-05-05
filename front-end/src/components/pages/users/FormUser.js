@@ -13,9 +13,9 @@ function FormUser({ showForm, id }) {
         SegundoApellido: '',
         Genero: null,
         Correo: '',
-        FechaNacimiento: '', // Puedes inicializar la fecha a la actual o alguna otra
+        FechaNacimiento: '', 
         Telefono: '',
-        IDRol: '0', // Se inicializa como string para que coincida con el valor de las opciones
+        IDRol: 0,
         NombreUsuario: '',
         Contraseña: '',
         ConfirmarContraseña: '',
@@ -23,7 +23,7 @@ function FormUser({ showForm, id }) {
     };
 
     const dispatch = useDispatch();
-    const [user, setUser] = useState(initialUserState);
+    const [user, setUser] = useState({initialUserState});
 
     useEffect(() => {
         if (id > 0) {
@@ -32,7 +32,7 @@ function FormUser({ showForm, id }) {
                     setUser(response.payload);
                 });
         }
-    }, [dispatch, id, initialUserState]);
+    }, [dispatch, id]);
 
     const handleCancel = () => {
         setUser(initialUserState);

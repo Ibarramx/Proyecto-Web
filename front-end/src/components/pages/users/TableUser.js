@@ -65,7 +65,11 @@ function TableUser({ showForm, idUserEdit }) {
         if(userSelected){
             showForm();
         }else{
-            alert('Seleccione un usuario para modificar');
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Seleccione un usuario para modificar",
+              });
         }
     };
 
@@ -106,31 +110,34 @@ function TableUser({ showForm, idUserEdit }) {
                 </Col>
             </Row>
             <Row className='m-1'>
-                <Grid
-                    style={{
-                    height: "400px",
-                    }}
-                    data={users ? (users.map((item) => ({
-                    ...item,
-                    [SELECTED_FIELD]: selectedState[idGetter(item)],
-                    }))) : null }
-                    dataItemKey={DATA_ITEM_KEY}
-                    selectedField={SELECTED_FIELD}
-                    selectable={{
-                    enabled: true,
-                    drag: true,
-                    mode: "single",
-                    }}
-                    navigatable={true}
-                    onSelectionChange={onSelectionChange}
-                    onKeyDown={onKeyDown}
-                >
-                        <Column field={SELECTED_FIELD} width="50px" filterable={false} />
-                        <Column field="nombre" title="Nombre" width="120px" />
-                        <Column field="primerApellido" title="Primer Apellido" width="170px" />
-                        <Column field="segundoApellido" title="Segundo Apellido" width="170px" />
-                        <Column field="nombreUsuario" title="Nombre de Usuario" width="160px" />
-                </Grid>
+                <Col className="d-flex justify-content-center">
+                    <Grid
+                        data={users ? (users.map((item) => ({
+                        ...item,
+                        [SELECTED_FIELD]: selectedState[idGetter(item)],
+                        }))) : null }
+                        dataItemKey={DATA_ITEM_KEY}
+                        selectedField={SELECTED_FIELD}
+                        selectable={{
+                        enabled: true,
+                        drag: true,
+                        mode: "single",
+                        }}
+                        navigatable={true}
+                        onSelectionChange={onSelectionChange}
+                        onKeyDown={onKeyDown}
+                    >
+                            <Column field={SELECTED_FIELD} width="50px" filterable={false} />
+                            <Column field="nombre" title="Nombre" width="120px" />
+                            <Column field="primerApellido" title="Primer Apellido" width="170px" />
+                            <Column field="segundoApellido" title="Segundo Apellido" width="170px" />
+                            <Column field="nombreUsuario" title="Nombre de Usuario" width="160px" />
+                            <Column field="telefono" title="Telefono" width="160px" />
+                            <Column field="correo" title="Correo" width="160px" />
+                            <Column field="habilitado" title="habilitado" width="100px" />
+                    </Grid>
+                </Col>
+                
             </Row>
         </>
     );
