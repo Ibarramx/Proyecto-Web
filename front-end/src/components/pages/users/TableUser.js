@@ -10,6 +10,7 @@ import { getter } from "@progress/kendo-react-common";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from '../../../redux/actions/actionUsers';
+import Swal from "sweetalert2";
 
 const DATA_ITEM_KEY = "idUsuario";
 const SELECTED_FIELD = "selected";
@@ -72,11 +73,24 @@ function TableUser({ showForm, idUserEdit }) {
         if (userSelected) {
           // Eliminar usuario seleccionado
           const idUserDelete = Object.keys(selectedState)[0];
-          dispatch(deleteUser(idUserDelete));
+          dispatch(deleteUser(idUserDelete)).then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Usuario eliminado",
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(() => {
+              dispatch(getUsers());
+            });
+          });
         } else {
-          alert("Seleccione un usuario para eliminar");
-        }
-      };
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Seleccione un usuario para eliminar",
+          });
+          }
+    };
 
     return (
         <>
@@ -112,9 +126,9 @@ function TableUser({ showForm, idUserEdit }) {
                     onKeyDown={onKeyDown}
                 >
                         <Column field={SELECTED_FIELD} width="50px" filterable={false} />
-                        <Column field="nombre" title="Nombre" />
-                        <Column field="primerApellido" title="Primer Apellido" width="340px" />
-                        <Column field="segundoApellido" title="Segundo Apellido" width="180px" />
+                        <Column field="nombre" title="Nombre" width="120px" />
+                        <Column field="primerApellido" title="Primer Apellido" width="170px" />
+                        <Column field="segundoApellido" title="Segundo Apellido" width="170px" />
                         <Column field="nombreUsuario" title="Nombre de Usuario" width="160px" />
                 </Grid>
             </Row>

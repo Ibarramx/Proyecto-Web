@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Col, Row, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { getUserUnique } from '../../../redux/actions/actionUsers';
+import { addUser, getUserUnique } from '../../../redux/actions/actionUsers';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 function FormUser({ showForm, id }) {
     const initialUserState = {
-        nombre: '',
-        primerApellido: '',
-        segundoApellido: '',
-        genero: '',
-        correo: '',
-        fechaNacimiento: new Date(), // Puedes inicializar la fecha a la actual o alguna otra
-        telefono: '',
-        idRol: '0', // Se inicializa como string para que coincida con el valor de las opciones
-        nombreUsuario: '',
-        contrasena: '',
-        confirmarContrasena: ''
+        IDUsuario: 0,
+        Nombre: '',
+        PrimerApellido: '',
+        SegundoApellido: '',
+        Genero: null,
+        Correo: '',
+        FechaNacimiento: '', // Puedes inicializar la fecha a la actual o alguna otra
+        Telefono: '',
+        IDRol: '0', // Se inicializa como string para que coincida con el valor de las opciones
+        NombreUsuario: '',
+        Contraseña: '',
+        ConfirmarContraseña: '',
+        Habilitado: true
     };
 
     const dispatch = useDispatch();
@@ -29,25 +31,8 @@ function FormUser({ showForm, id }) {
                 .then((response) => {
                     setUser(response.payload);
                 });
-        } else {
-            setUser(initialUserState);
         }
     }, [dispatch, id, initialUserState]);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleDateChange = (date) => {
-        setUser(prevState => ({
-            ...prevState,
-            fechaNacimiento: date
-        }));
-    };
 
     const handleCancel = () => {
         setUser(initialUserState);
@@ -55,8 +40,11 @@ function FormUser({ showForm, id }) {
     };
 
     const handleGuardar = () => {
-        // Aquí deberías realizar las acciones necesarias para guardar el usuario
-        console.log(user);
+        if(user.Contraseña === user.ConfirmarContraseña){
+            dispatch(addUser(user)).then(() => {
+                console.log('Usuario guardado');
+            });
+        }
     };
 
     return (
@@ -74,8 +62,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type="text"
                                 name="nombre"
-                                value={user.nombre}
-                                onChange={handleChange}
+                                value={user.Nombre}
+                                onChange={(e) => setUser({ ...user, Nombre: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -89,8 +77,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type="text"
                                 name="primerApellido"
-                                value={user.primerApellido}
-                                onChange={handleChange}
+                                value={user.PrimerApellido}
+                                onChange={(e) => setUser({ ...user, PrimerApellido: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -104,8 +92,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type="text"
                                 name="segundoApellido"
-                                value={user.segundoApellido}
-                                onChange={handleChange}
+                                value={user.SegundoApellido}
+                                onChange={(e) => setUser({ ...user, SegundoApellido: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -116,12 +104,14 @@ function FormUser({ showForm, id }) {
                             <Form.Label>Genero: </Form.Label>
                         </Col>
                         <Col lg={7} sm={12} xl={6}>
-                            <Form.Control
-                                type='text'
-                                name="genero"
-                                value={user.genero}
-                                onChange={handleChange}
-                            />
+                            <Form.Select 
+                                    name="genero" 
+                                    value={user.Genero} 
+                                    onChange={(e) => setUser({...user, Genero: e.target.value == 1 ? true : false })}>
+                                    <option value={""} disabled>Seleccione un Genero</option>
+                                    <option value={1}>Masculino</option>
+                                    <option value={2}>Femenino</option>
+                            </Form.Select>
                         </Col>
                     </Row>
                     <br />
@@ -133,8 +123,8 @@ function FormUser({ showForm, id }) {
                         <Col lg={7} sm={12} xl={6}>
                             <DatePicker
                                 className='form-control'
-                                selected={user.fechaNacimiento}
-                                onChange={handleDateChange}
+                                selected={user.FechaNacimiento}
+                                onChange={(date) => setUser({ ...user, FechaNacimiento: date })}
                             />
                         </Col>
                     </Row>
@@ -148,8 +138,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type='text'
                                 name="correo"
-                                value={user.correo}
-                                onChange={handleChange}
+                                value={user.Correo}
+                                onChange={(e) => setUser({ ...user, Correo: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -163,8 +153,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type='text'
                                 name="telefono"
-                                value={user.telefono}
-                                onChange={handleChange}
+                                value={user.Telefono}
+                                onChange={(e) => setUser({ ...user, Telefono: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -175,7 +165,10 @@ function FormUser({ showForm, id }) {
                             <Form.Label>Rol: </Form.Label>
                         </Col>
                         <Col lg={7} sm={12} xl={6}>
-                            <Form.Select name="idRol" value={user.idRol} onChange={handleChange}>
+                            <Form.Select 
+                                name="idRol" 
+                                value={user.IDRol} 
+                                onChange={(e) => setUser({ ...user, IDRol: parseInt(e.target.value) })}>
                                 <option value={"0"} disabled>Seleccione un Rol</option>
                                 <option value={"1"}>Administrador</option>
                                 <option value={"2"}>Usuario</option>
@@ -192,8 +185,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type="text"
                                 name="nombreUsuario"
-                                value={user.nombreUsuario}
-                                onChange={handleChange}
+                                value={user.NombreUsuario}
+                                onChange={(e) => setUser({ ...user, NombreUsuario: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -207,8 +200,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type="password"
                                 name="contrasena"
-                                value={user.contrasena}
-                                onChange={handleChange}
+                                value={user.Contraseña}
+                                onChange={(e) => setUser({ ...user, Contraseña: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -222,8 +215,8 @@ function FormUser({ showForm, id }) {
                             <Form.Control
                                 type="password"
                                 name="confirmarContrasena"
-                                value={user.confirmarContrasena}
-                                onChange={handleChange}
+                                value={user.ConfirmarContraseña}
+                                onChange={(e) => setUser({ ...user, ConfirmarContraseña: e.target.value })}
                             />
                         </Col>
                     </Row>
@@ -237,4 +230,5 @@ function FormUser({ showForm, id }) {
         </Col>
     );
 }
+
 export default FormUser;
