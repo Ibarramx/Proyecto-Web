@@ -13,7 +13,7 @@ const Root = () => {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route element={ <App path="/"/> } exact />
+          <Route element={ <App path="/"/> } path='/' exact />
           <Route element={ <App path="Usuarios"/> } path="Usuarios" exact />
         </Routes>
       </BrowserRouter>
