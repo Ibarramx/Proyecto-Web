@@ -20,7 +20,6 @@ namespace API.Controllers.Usuarios
         public ActionResult<IEnumerable<ItemUsuarioDto>> Get()
         {
             var usuarios = (from u in _contexto.Usuario
-                            where u.Habilitado
                             select new ItemUsuarioDto
                             {
                                 IDUsuario = u.IDUsuario,

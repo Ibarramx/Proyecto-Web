@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@progress/kendo-theme-default/dist/all.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './index.css';
+import 'sweetalert2/src/sweetalert2.scss';
 
 // Redux
 import store from '../src/redux/store/store';

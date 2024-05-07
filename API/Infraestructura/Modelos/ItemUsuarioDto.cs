@@ -13,6 +13,8 @@
         public string Telefono { get; set; }
         public string NombreUsuario { get; set; }
         public string Contraseña { get; set; }
+
+        public string ConfirmarContraseña { get; set; }
         public bool Habilitado { get; set; }
 
         public string NombreCompleto => Nombre + " " + PrimerApellido + " " + SegundoApellido;
