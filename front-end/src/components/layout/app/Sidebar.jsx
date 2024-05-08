@@ -27,10 +27,12 @@ const Sidebar = () => {
             <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Inicio</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/Roles" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="users">Roles</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/Usuarios" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Usuarios</CDBSidebarMenuItem>
             </NavLink>
-
             <NavLink
               exact
               to="/hero404"
