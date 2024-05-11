@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Usuarios
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
     {
@@ -14,7 +14,6 @@ namespace API.Controllers.Usuarios
         {
             _contexto = contexto;
         }
-        private dataUsuarios semilla = new dataUsuarios();
 
         [HttpGet]
         public ActionResult<IEnumerable<ItemUsuarioDto>> Get()
