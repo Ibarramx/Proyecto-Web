@@ -1,4 +1,4 @@
-import { useState, useEffect }from "react";
+import * as React from "react";
 import {
   Grid,
   GridColumn as Column,
@@ -8,18 +8,18 @@ import {
 import { getter } from "@progress/kendo-react-common";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, getUsers } from '../../../redux/actions/actionUsers';
 import Swal from "sweetalert2";
+import { deleteRole, getRoles } from "../../../redux/actions/actionRoles";
 
-const DATA_ITEM_KEY = "idUsuario";
+const DATA_ITEM_KEY = "idRole";
 const SELECTED_FIELD = "selected";
 const idGetter = getter(DATA_ITEM_KEY);
 
-function TableUser({ showForm, idUserEdit }) {
+function TableRole({ showForm, idRoleEdit }) {
     const dispatch = useDispatch();
-    const [selectedState, setSelectedState] = useState({});
-    const { users } = useSelector((state) => state.getUsers);
-    const [userSelected, setUserSelected] = useState(false);
+    const [selectedState, setSelectedState] = React.useState({});
+    const { roles } = useSelector((state) => state.getUsers);
+    const [roleSelected, setRoleSelected] = React.useState(false);
 
     const onSelectionChange = (event) => {
         const newSelectedState = getSelectedState({
@@ -28,8 +28,8 @@ function TableUser({ showForm, idUserEdit }) {
         dataItemKey: DATA_ITEM_KEY,
         });
         setSelectedState(newSelectedState);
-        setUserSelected(true);
-        idUserEdit(Object.keys(newSelectedState)[0]);
+        setRoleSelected(true);
+        idRoleEdit(Object.keys(newSelectedState)[0]);
     };
 
     const onKeyDown = (event) => {
@@ -41,10 +41,10 @@ function TableUser({ showForm, idUserEdit }) {
         setSelectedState(newSelectedState);
     };
 
-    useEffect(() => {
-        dispatch(getUsers());
-        if(users){
-            users.map((dataItem) =>
+    React.useEffect(() => {
+        dispatch(getRoles());
+        if(roles){
+            roles.map((dataItem) =>
                 Object.assign(
                 {
                     selected: false,
@@ -57,40 +57,40 @@ function TableUser({ showForm, idUserEdit }) {
 
     const handleNew = () => {
         showForm();
-        idUserEdit(0);
+        idRoleEdit(0);
     };
 
     const handleEdit = () => {
-        if(userSelected){
+        if(roleSelected){
             showForm();
         }else{
             Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "Seleccione un usuario para modificar",
+                text: "Seleccione un rol para modificar",
               });
         }
     };
 
     const handleDelete = () => {
-        if (userSelected) {
+        if (roleSelected) {
           // Eliminar usuario seleccionado
-          const idUserDelete = Object.keys(selectedState)[0];
-          dispatch(deleteUser(idUserDelete)).then(() => {
+          const idRoleDelete = Object.keys(selectedState)[0];
+          dispatch(deleteRole(idRoleDelete)).then(() => {
             Swal.fire({
               icon: "success",
-              title: "Usuario eliminado",
+              title: "Rol eliminado",
               showConfirmButton: false,
               timer: 1500,
             }).then(() => {
-              dispatch(getUsers());
+              dispatch(getRoles());
             });
           });
         } else {
           Swal.fire({
             icon: "error",
             title: "Error",
-            text: "Seleccione un usuario para eliminar",
+            text: "Seleccione un rol para eliminar",
           });
           }
     };
@@ -99,19 +99,19 @@ function TableUser({ showForm, idUserEdit }) {
         <>
             <Row className='m-1'>
                 <Col>
-                    <Button variant='primary' onClick={handleNew}>Nuevo Usuario</Button>
+                    <Button variant='primary' onClick={handleNew}>Nuevo Rol</Button>
                 </Col>
                 <Col>
-                    <Button variant='warning' onClick={handleEdit}>Modificar Usuario</Button>
+                    <Button variant='warning' onClick={handleEdit}>Modificar Rol</Button>
                 </Col>
                 <Col>
-                    <Button variant='danger' onClick={handleDelete}>Eliminar Usuario</Button>
+                    <Button variant='danger' onClick={handleDelete}>Eliminar Rol</Button>
                 </Col>
             </Row>
             <Row className='m-1'>
                 <Col className="d-flex justify-content-center">
                     <Grid
-                        data={users ? (users.map((item) => ({
+                        data={roles ? (roles.map((item) => ({
                         ...item,
                         [SELECTED_FIELD]: selectedState[idGetter(item)],
                         }))) : null }
@@ -127,12 +127,9 @@ function TableUser({ showForm, idUserEdit }) {
                         onKeyDown={onKeyDown}
                     >
                             <Column field={SELECTED_FIELD} width="50px" filterable={false} />
-                            <Column field="nombre" title="Nombre" width="120px" />
-                            <Column field="primerApellido" title="Primer Apellido" width="170px" />
-                            <Column field="segundoApellido" title="Segundo Apellido" width="170px" />
-                            <Column field="nombreUsuario" title="Nombre de Usuario" width="160px" />
-                            <Column field="telefono" title="Telefono" width="160px" />
-                            <Column field="correo" title="Correo" width="160px" />
+                            <Column field="descripcion" title="Descripcion" width="120px" />
+                            <Column field="fechaCreado" title="Fecha Creado" width="170px" />
+                            <Column field="fechaModificado" title="Fecha Modificado" width="170px" />
                             <Column field="habilitado" title="habilitado" width="100px" />
                     </Grid>
                 </Col>
@@ -142,4 +139,4 @@ function TableUser({ showForm, idUserEdit }) {
     );
 }
 
-export default TableUser;
+export default TableRole;
