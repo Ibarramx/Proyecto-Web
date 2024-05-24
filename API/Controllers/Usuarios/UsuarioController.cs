@@ -1,4 +1,5 @@
-﻿using API.Comun.Interfaces;
+﻿using API.Comun.Excepciones;
+using API.Comun.Interfaces;
 using API.Entidades;
 using API.Infraestructura.Modelos;
 using Microsoft.AspNetCore.Mvc;
@@ -63,27 +64,32 @@ namespace API.Controllers.Usuarios
         [HttpPost]
         public ActionResult Post([FromBody] ItemUsuarioDto user)
         {
-            var newUser = new Usuario()
-            {
-                Nombre = user.Nombre,
-                PrimerApellido = user.PrimerApellido,
-                SegundoApellido = user.SegundoApellido,
-                Genero = user.Genero,
-                Correo = user.Correo,
-                Telefono = user.Telefono,
-                NombreUsuario = user.NombreUsuario,
-                Contraseña = Base64Encode(user.Contraseña),
-                FechaNacimiento = user.FechaNacimiento,
-                FechaCreacion = DateTime.Now,
-                FechaModificacion = DateTime.Now,
-                IDRol = user.IDRol,
-                Habilitado = true
-            };
+            var existe = ValidacionNombre(user);
             
-            _contexto.Usuario.Add(newUser);
-            _contexto.SaveChanges();
-
-            return Ok();
+            if(existe == false)
+            {
+                var newUser = new Usuario()
+                {
+                    Nombre = user.Nombre,
+                    PrimerApellido = user.PrimerApellido,
+                    SegundoApellido = user.SegundoApellido,
+                    Genero = user.Genero,
+                    Correo = user.Correo,
+                    Telefono = user.Telefono,
+                    NombreUsuario = user.NombreUsuario,
+                    Contraseña = Base64Encode(user.Contraseña),
+                    FechaNacimiento = user.FechaNacimiento,
+                    FechaCreacion = DateTime.Now,
+                    FechaModificacion = DateTime.Now,
+                    IDRol = user.IDRol,
+                    Habilitado = true
+                };
+                _contexto.Usuario.Add(newUser);
+                _contexto.SaveChanges();
+                return Ok();
+            }
+            
+            return BadRequest();
         }
 
         [HttpPut("{id}")]
@@ -129,6 +135,18 @@ namespace API.Controllers.Usuarios
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        private bool ValidacionNombre(ItemUsuarioDto usuario)
+        {
+            return (from u in _contexto.Usuario
+                    where (u.Nombre.Contains(usuario.Nombre) && 
+                          u.PrimerApellido.Contains(u.PrimerApellido) &&
+                          u.SegundoApellido.Contains(u.SegundoApellido)) ||
+                          u.NombreUsuario.Contains(usuario.NombreUsuario) ||
+                          u.Correo == usuario.Correo || 
+                          u.Telefono == usuario.Telefono
+                    select u).Any();
         }
     }
 }

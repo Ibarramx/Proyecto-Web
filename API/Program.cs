@@ -37,9 +37,6 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(NoManejadaExcepcionComportamiento<,>));
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidadorComportamiento<,>));
-
 // Configurar pol�ticas CORS
 builder.Services.AddCors(options =>
 {
